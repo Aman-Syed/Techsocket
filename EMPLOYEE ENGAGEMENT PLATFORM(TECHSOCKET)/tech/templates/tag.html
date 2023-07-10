@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>TechSocket</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css'%}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico'%}" />
+    <style>
+        .active {
+            color: #b66dff !important;
+        }
+
+        .d-yes {
+            display: none !important;
+        }
+
+        .comment {
+            border-radius: 5px;
+            border: none;
+            background-color: white;
+            width: 30%;
+            height: 30px;
+            border-top: 0.5px solid gray;
+            border-bottom: 0.1px solid gray;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: rgb(78, 77, 77)
+        }
+
+        .sh {
+            display: block !important;
+        }
+
+        @media all and (max-width: 950px) {
+
+            .searnew {
+                display: none;
+            }
+
+            .dis {
+                display: inline;
+            }
+
+            .d-no {
+                display: none;
+            }
+
+            .d-yes {
+                display: block !important;
+            }
+
+            .whi {
+                margin-top: 40px !important;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-scroller">
+
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href="/index"><img src="{% static 'images/faces/5.png'%}"
+                        style="height:45px ; width:210px" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="/index"><img src="{% static 'images/logo-mini.svg'%}"
+                        alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-stretch">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+
+                {%for x in userdetails%}
+                <ul class="navbar-nav navbar-nav-right">
+
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <div class="nav-profile-img">
+                                {% with 'images/faces/'|add:x.user_id|add:'.jpg' as image_static %}
+                                <img src="{% static image_static %}" alt="image">
+                                {% endwith %}<span class="availability-status online"></span>
+                            </div>
+                            <div class="nav-profile-text">
+                                <p class="mb-1 text-black">{{x.first_name}} &nbsp; {{x.last_name}}</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">
+                                <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item nav-settings  d-lg-block">
+                        <a class="nav-link" href="/personaldm">
+                            <i class="mdi mdi-facebook-messenger"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-settings  d-lg-block">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-format-line-spacing"></i>
+                        </a>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top  d-yes"
+            style="margin-top:70px !important ;">
+
+            <div style="width:100% ;">
+
+                <div style="float: right ; max-width:250px; margin-top: 0px;">
+                    <a class="nav-link" style="padding-top: 0px !important;" href="/techquery">
+                        <button class="btn btn-gradient-light btn-rounded btn-fw te"> Tech Query</button>
+                    </a>
+                </div>
+
+
+
+
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas whi" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item nav-profile">
+                        <a href="#" class="nav-link">
+                            <div class="nav-profile-image">
+                                {% with 'images/faces/'|add:x.user_id|add:'.jpg' as image_static %}
+                                <img src="{% static image_static %}" alt="image">
+                                {% endwith %}
+                                <span class="login-status online"></span>
+                                <!--change to offline or busy as needed-->
+                            </div>
+                            <div class="nav-profile-text d-flex flex-column">
+                                <span class="font-weight-bold mb-2">{{x.first_name}} &nbsp; {{x.last_name}}</span>
+                                <span class="text-secondary text-small">{{x.designation}}</span>
+                            </div>
+                            <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="/techquery">
+                            <span class="menu-title ">Questions</span>
+                            <i class="mdi mdi-comment-question-outline menu-icon "></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tag">
+                            <span class="menu-title active">Tags</span>
+                            <i class="mdi mdi-mail-ru menu-icon active"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/yourqueries">
+                            <span class="menu-title  ">Your Queries</span>
+                            <i class="mdi mdi mdi-comment-account menu-icon "></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/postquery">
+                            <span class="menu-title">Post Query</span>
+                            <i class="mdi mdi-message-draw menu-icon"></i>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </nav>
+            {%endfor%}
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="page-header">
+                        <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                                <i class="mdi mdi-comment-question-outline"></i>
+                            </span>Tech Queries
+                        </h3>
+
+                    </div>
+
+                    {%for x in posts%}
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title"><img src="{% static 'images/faces/face30.jpg'%}"
+                                            class="img-sm rounded-circle me-3" alt="image">
+
+                                        <span
+                                            style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:23px;">
+                                             </span>&nbsp;&nbsp;<br><br>
+                                    <div style="width:50px ; float: left;"> <i
+                                            class="mdi mdi-play mdi-rotate-270"></i><br>&nbsp;5<br>
+                                        <i class="mdi mdi-play mdi-rotate-90"></i>
+                                    </div><br>
+                                    <span
+                                        style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-left: 20px;">
+                                        {{x.skill}} </span>
+                                    </p>
+                                    <br>
+                                    <div class="mb-0 flex-grow">
+                                        <p class="mb-0 " style="margin-left:30px ;">    {{x.post}} </p>
+                                    </div>
+                                    <br>
+                                    <div class="mb-0 flex-grow" style="margin-left: 30px; padding-top: 10px ;">
+                                        <i class="mdi mdi-panda "
+                                            style="font-size: 30px !important;float:left"></i>&nbsp;&nbsp;&nbsp;
+                                        <a id="RecognitionDropdown" href="#" onclick="Dis()"
+                                            style="width: 35px !important;float:left;padding-top: 0px;color: black;">
+                                            <i class="mdi  mdi-comment-multiple-outline"
+                                                style="font-size: 30px !important;margin-left: 10px;"></i></a>
+
+
+                                        <i class="fa  fa-paper-plane"
+                                            style="font-size: 30px !important;float:right;"></i>
+
+                                        <div class="col-9 grid-margin stretch-card " id="pcomment"
+                                            style="display: none;padding-top: 5px;margin-top: 15px; background-color: #eceef1;border-radius: 10px;">
+
+
+                                            <div class="card-body" style="padding-top: 5px ;padding-bottom:15px">
+
+
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-0 flex-grow"
+                                        style="margin-left: 60px;padding-top: 5px ;margin-top:40px">
+                                        <form action="/postcommentmentions/" method="POST">
+                                            {% csrf_token %}
+                                            <textarea class="comment" placeholder="Reply..." style="float:left;"
+                                                name="comment"></textarea>
+                                            <input type="hidden" name="post_id" value={{x.post_id}}>
+                                            <button class="msg_send_btn" type="submit"
+                                                style="border:none  ;float:left;padding: 2.5px; background-color: white;"><i
+                                                    class="mdi  mdi-send" aria-hidden="true"
+                                                    style="font-size:20px ;"></i></button>
+                                        </form>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <!-- <footer class="footer">
+          <div class="container-fluid d-flex justify-content-between">
+            <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com
+              2021</span>
+            <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a
+                href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin
+                template</a> from Bootstrapdash.com</span>
+          </div>
+        </footer> -->
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{%static 'vendors/js/vendor.bundle.base.js'%}"></script>
+    <script>function Dis() {
+            document.getElementById("pcomment").classList.toggle("sh");
+        }</script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{%static 'vendors/chart.js/Chart.min.js'%}"></script>
+    <script src="{%static 'js/jquery.cookie.js'%}" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{%static 'js/off-canvas.js'%}"></script>
+    <script src="{%static 'js/hoverable-collapse.js'%}"></script>
+    <script src="{%static 'js/misc.js'%}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{%static 'js/dashboard.js'%}"></script>
+    <script>
+        function btnToggle() {
+            document.getElementById("Dropdown").classList.toggle("show");
+        }
+
+        // Prevents menu from closing when clicked inside
+        document.getElementById("Dropdown").addEventListener('click', function (event) {
+
+            event.stopPropagation();
+        });
+    </script>
+    <script src="{%static 'js/todolist.js'%}"></script>
+    <!-- End custom js for this page -->
+</body>
+
+</html>
